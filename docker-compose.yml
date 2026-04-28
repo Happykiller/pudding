@@ -1,0 +1,22 @@
+services:
+  redis:
+    image: redis:${REDIS_VERSION:-7.2-alpine}
+    container_name: ${COMPOSE_PROJECT_NAME:-pudding}-redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_HOST_PORT:-6379}:6379"
+    volumes:
+      - redis-data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf:ro
+    command: redis-server /usr/local/etc/redis/redis.conf
+    environment:
+      - TZ=${TZ:-UTC}
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  redis-data:
+    name: ${COMPOSE_PROJECT_NAME:-pudding}-redis-data
