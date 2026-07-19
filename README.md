@@ -62,5 +62,5 @@ Les données sont stockées dans un volume Docker nommé `<COMPOSE_PROJECT_NAME>
 La configuration Redis est dans `redis.conf` (monté en lecture seule) :
 
 - **Persistence** : RDB + AOF activés
-- **Mémoire** : 256 MB max, politique `allkeys-lru`
+- **Mémoire** : 256 MB max, politique `noeviction`
 - **Healthcheck** : `redis-cli ping` toutes les 10 s

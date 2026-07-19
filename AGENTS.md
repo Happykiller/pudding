@@ -37,7 +37,7 @@ All variables have defaults and can be overridden via `.env` (copy from `.env.ex
 ## Architecture
 
 - `docker-compose.yml` — single `redis` service; image tag, port, and project name driven by env vars
-- `redis.conf` — mounted read-only into the container; controls persistence (RDB + AOF), memory cap (256 MB, `allkeys-lru`), and logging
+- `redis.conf` — mounted read-only into the container; controls persistence (RDB + AOF), memory cap (256 MB, `noeviction`), and logging
 - `Makefile` — all operational tasks; variables default-set at the top, `.env` loaded with `-include` so it never overrides shell env
 
 Data is persisted in a named Docker volume `<COMPOSE_PROJECT_NAME>-redis-data`.
